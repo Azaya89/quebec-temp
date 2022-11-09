@@ -41,20 +41,22 @@ file = "quebec.csv"
 dates, highs, lows, avgs = [], [], [], []
 get_temp_data(file, dates, highs, lows, avgs)
 
+highest_temp = sorted(highs)
+highest_temp = highest_temp[-1]
+lowest_temp = sorted(lows)
+lowest_temp = lowest_temp[0]
 
 # Plot the data
-fig, ax = plt.subplots(figsize=(9, 6))
+fig, ax = plt.subplots(figsize=(10, 6))
 plt.title("Average temperature in Quebec, Canada in 2021", fontsize=20)
 fig.autofmt_xdate()
-plt.xlabel("Date", fontsize=20)
+plt.xlabel("")
 plt.ylabel("Temperature(F)", fontsize=20)
+ax.plot(dates, avgs)
+## Plot the high and low temperatures optionally.
 # ax.plot(dates, highs, c="red")
 # ax.plot(dates, lows, c="blue")
-ax.plot(dates, avgs)
 # plt.fill_between(dates, highs, lows, facecolor='blue', alpha=0.1)
 
 
 plt.show()
-
-
-# csv data gotten from https://www.ncdc.noaa.gov/cdo-web/
