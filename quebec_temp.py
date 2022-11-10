@@ -41,10 +41,15 @@ file = "quebec.csv"
 dates, highs, lows, avgs = [], [], [], []
 get_temp_data(file, dates, highs, lows, avgs)
 
-highest_temp = sorted(highs)
-highest_temp = highest_temp[-1]
-lowest_temp = sorted(lows)
-lowest_temp = lowest_temp[0]
+# Get the lowest and highest average temperature.
+sorted_avgs = sorted(avgs)
+highest_avg = sorted_avgs[-1]
+lowest_avg = sorted_avgs[0]
+
+if lowest_avg and highest_avg in avgs:
+    lowest_date = dates[avgs.index(lowest_avg)]
+    highest_date = dates[avgs.index(highest_avg)]
+
 
 # Plot the data
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -52,7 +57,10 @@ plt.title("Average temperature in Quebec, Canada in 2021", fontsize=20)
 fig.autofmt_xdate()
 plt.xlabel("")
 plt.ylabel("Temperature(F)", fontsize=20)
-ax.plot(dates, avgs)
+ax.plot(dates, avgs, c="green")
+ax.scatter(lowest_date, lowest_avg, c="blue", s=30)
+ax.scatter(highest_date, highest_avg, c="red", s=30)
+
 ## Plot the high and low temperatures optionally.
 # ax.plot(dates, highs, c="red")
 # ax.plot(dates, lows, c="blue")
